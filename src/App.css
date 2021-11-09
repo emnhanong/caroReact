@@ -1,0 +1,31 @@
+.App {
+  width: 30%;
+  margin: auto;
+  margin-top: 50px;
+}
+.wrap{
+  margin-left: 30px;
+}
+.text-right{
+  margin-left: 30px;
+}
+.list-history{
+  list-style-type:decimal;
+}
+.move-btn,.toggle{
+  background: #F3C2BE;
+  border: none;
+  line-height: 35px;
+  padding: 0px 10px;
+  color: #fff;
+  font-size: 14px;
+  margin: 5px 15px;
+  cursor: pointer;
+}
+.check-winner{
+  margin-bottom: 20px;
+}
+.wrap-left{
+  height: 100%;
+}
+  
