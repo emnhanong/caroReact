@@ -3,17 +3,27 @@
   margin: auto;
   margin-top: 50px;
 }
-.wrap{
+.square{
+  background: #fff;
+  border: 1px solid #ccc;
+  width: 60px;
+  height: 60px;
+  font-size: 18px;
+  outline: none;
+  cursor: pointer;
+}
+.wrap-all {
+  display: flex;
+}
+.text-right {
   margin-left: 30px;
 }
-.text-right{
-  margin-left: 30px;
+.list-history {
+  list-style-type: decimal;
 }
-.list-history{
-  list-style-type:decimal;
-}
-.move-btn,.toggle{
-  background: #F3C2BE;
+.move-btn,
+.toggle {
+  background: #f3c2be;
   border: none;
   line-height: 35px;
   padding: 0px 10px;
@@ -22,10 +32,23 @@
   margin: 5px 15px;
   cursor: pointer;
 }
-.check-winner{
+.check-winner {
   margin-bottom: 20px;
 }
-.wrap-left{
+.wrap-left {
   height: 100%;
 }
-  
+.btn-reset {
+  background: #f3c2be;
+  line-height: 40px;
+  padding: 0px 40px;
+  font-size: 18px;
+  cursor: pointer;
+  color: #fff;
+  border: 1px solid #f3c2be;
+  transition: 0.3s;
+}
+.App .square--won{
+  background: #f3c2be;
+  color: #fff;
+}

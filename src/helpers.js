@@ -16,7 +16,10 @@ export const calculateWinner = (squares) => {
       squares[a] === squares[b] &&
       squares[a] === squares[c]
     ) {
-      return squares[a];
+      return {
+        isWinner: squares[a],
+        line: [a,b,c]
+      }
     }
   }
   return null;

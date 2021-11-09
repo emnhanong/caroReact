@@ -2,21 +2,6 @@ import React, { useState } from "react";
 import { calculateWinner, getCoordinates, listWinnerLines } from "../helpers";
 import Square from "./Square";
 
-const style = {
-  backgroundColor: "#F3C2BE",
-  lineHeight: "40px",
-  padding: "0px 40px",
-  fontSize: "18px",
-  cursor: "pointer",
-  color: "#fff",
-  border: "1px solid #F3C2BE",
-  transition: "0.3s",
-};
-
-const styleCaro = {
-  display: "flex",
-};
-
 const Game = () => {
   const initState = Array(9).fill(null);
   const [history, setHistory] = useState([initState]);
@@ -26,11 +11,13 @@ const Game = () => {
   const [toggle, setToggle] = useState(false);
   const winner = calculateWinner(history[stepNumber]);
 
+
   const handleClick = (index) => {
     const timeInHistory = history.slice(0, stepNumber + 1);
     const current = timeInHistory[stepNumber];
     const historyClone = [...current];
     const coordinates = getCoordinates(listWinnerLines, index);
+
 
     if (winner || historyClone[index]) return;
     historyClone[index] = isXO ? "X" : "O";
@@ -38,10 +25,8 @@ const Game = () => {
     setStepNumber(timeInHistory.length);
     setIsXO(!isXO);
     setCoordinatesHistory([...coordinatesHistory, coordinates]);
-    console.log(coordinatesHistory);
+    
   };
-
-
 
   const moveToStep = (step) => {
     setStepNumber(step);
@@ -51,6 +36,7 @@ const Game = () => {
   const toggleHistory = () => {
     setToggle(!toggle);
   };
+
 
   const renderHistory = () => {
     return history.map((step, move) => {
@@ -71,15 +57,21 @@ const Game = () => {
     setIsXO(true);
     setStepNumber(0);
     setHistory([initState]);
-  }
+  };
 
   const renderReset = (name) => {
     return (
-      <button style={style} onClick={handleReset}>
+      <button className="btn-reset" onClick={handleReset}>
         {name}
       </button>
     );
   };
+
+  const getWinner = () => {
+   if(winner){
+     return winner.isWinner;
+   }
+  }
 
   const handleCheckDraw = () => {
     let count = 0;
@@ -95,7 +87,7 @@ const Game = () => {
 
   const handleCheckWinner = () => {
     if (winner) {
-      return "Winner: " + winner;
+      return "Winner: " + getWinner();
     } else {
       return "Next player: " + (isXO ? "X" : "O");
     }
@@ -103,11 +95,11 @@ const Game = () => {
 
   return (
     <div>
-      <div style={styleCaro}>
+      <div className="wrap-all">
         <div className="wrap-left">
-          <Square squares={history[stepNumber]} onClick={handleClick} />
+          <Square squares={history[stepNumber]} onClick={handleClick} winningSquares={winner ? winner.line :[]}/>
           <div className="wrap-text">
-            <h1>{winner ? `"${winner}" is Winner` : ""}</h1>
+            <h1>{winner ? `"${getWinner()}"  is Winner` : ""}</h1>
             <div>{handleCheckDraw()}</div>
             <div>
               {winner || handleCheckDraw()
@@ -115,11 +107,13 @@ const Game = () => {
                 : renderReset("Reset Game")}
             </div>
           </div>
-        </div>  
+        </div>
         <div></div>
         <div className="text-right">
           <div className="check-winner">{handleCheckWinner()}</div>
-          <button className="toggle" onClick={toggleHistory}>Toggle Moves</button>
+          <button className="toggle" onClick={toggleHistory}>
+            Toggle Moves
+          </button>
           <div>
             <ul>{toggle ? renderHistory().reverse() : renderHistory()}</ul>
           </div>
