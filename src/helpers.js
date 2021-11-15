@@ -8,6 +8,7 @@ export const listWinnerLines = [
   [0, 4, 8],
   [2, 4, 6],
 ];
+
 export const calculateWinner = (squares) => {
   for (let index = 0; index < listWinnerLines.length; index++) {
     const [a, b, c] = listWinnerLines[index];
