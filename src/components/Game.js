@@ -4,55 +4,30 @@ import Square from "./Square";
 
 const Game = () => {
   const initState = Array(9).fill(null);
+
   const [history, setHistory] = useState([initState]);
   const [coordinatesHistory, setCoordinatesHistory] = useState([[]]);
   const [stepNumber, setStepNumber] = useState(0);
   const [isXO, setIsXO] = useState(true);
   const [toggle, setToggle] = useState(false);
-  
 
   const winner = calculateWinner(history[stepNumber]);
 
-
-  
   const handleClick = (index) => {
-
-    const timeInHistory = history.slice(0, stepNumber + 1);
-    const current = timeInHistory[stepNumber];
-    const historyClone = [...current];
+    const historyClone = [...history[stepNumber]];
     const coordinates = getCoordinates(listWinnerLines, index);
     if (winner || historyClone[index]) return;
     historyClone[index] = isXO ? "X" : "O";
+
+    const timeInHistory = history.slice(0, stepNumber + 1);
+    const timeInCoordinate = coordinatesHistory.slice(0, stepNumber + 1)
     setHistory([...timeInHistory, historyClone]);
+    setCoordinatesHistory([...timeInCoordinate, coordinates]);
     setStepNumber(timeInHistory.length);
     setIsXO(!isXO);
-
-    setCoordinatesHistory([...coordinatesHistory, coordinates]);
-  
   };
 
-
-
-
   const moveToStep = (step) => {
-    const indexCoordinatesHistory = coordinatesHistory.findIndex(
-      (item) => item === coordinatesHistory[step]
-    );  
-
-    const newCoordinatesHistory = coordinatesHistory.slice(
-      0,
-      indexCoordinatesHistory + 1
-    );
-      
-    const indexHistory = history.findIndex(
-      (item) => item === history[step]
-    );
-
-    const newHistory = history.slice(0, indexHistory + 1);
-    
-    setCoordinatesHistory(newCoordinatesHistory)
-    setHistory(newHistory);
-
     setStepNumber(step);
     setIsXO(step % 2 === 0);
   };
@@ -60,8 +35,6 @@ const Game = () => {
   const toggleHistory = () => {
     setToggle(!toggle);
   };
-
-
 
   const renderHistory = () => {
     return history.map((step, move) => {

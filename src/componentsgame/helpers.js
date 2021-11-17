@@ -22,10 +22,10 @@ export const calculateWinner = (squares) => {
   return null;
 };
 
-export const getCoordinates = (array, char) => {
-  for (let i = 0; i < array.length; i++) {
-    const i2 = array[i].indexOf(char);
-    if (i2 !== -1) return [i + 1, i2 + 1];
-  }
-  return undefined;
-};
+// export const getCoordinates = (array, char) => {
+//   for (let i = 0; i < array.length; i++) {
+//     const i2 = array[i].indexOf(char);
+//     if (i2 !== -1) return [i + 1, i2 + 1];
+//   }
+//   return undefined;
+// };
